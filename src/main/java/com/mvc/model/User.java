@@ -34,6 +34,14 @@ public class User {
     @Column(name = "image")
     private String image;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "friendships",
