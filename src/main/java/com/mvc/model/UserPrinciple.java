@@ -32,13 +32,6 @@ public class UserPrinciple implements UserDetails {
         this.roles = roles;
     }
 
-    public UserPrinciple(Long id, String username, String password, Collection<? extends GrantedAuthority> roles) {
-        this.id = id;
-        this.userName = username;
-        this.password = password;
-        this.roles = roles;
-    }
-
     public UserPrinciple(long id, String userName, String password, String email, String phone, String birthday, String image) {
         this.id = id;
         this.userName = userName;
@@ -59,6 +52,10 @@ public class UserPrinciple implements UserDetails {
                 user.getId(),
                 user.getUserName(),
                 user.getPassword(),
+                user.getEmail(),
+                user.getBirthday(),
+                user.getPhone(),
+                user.getImage(),
                 authorities
         );
     }
