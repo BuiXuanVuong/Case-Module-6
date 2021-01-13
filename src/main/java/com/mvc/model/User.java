@@ -16,7 +16,7 @@ public class User {
     @GeneratedValue
     private long id;
 
-    @Column(name = "username")
+    @Column(name = "userName")
     private String userName;
 
     @Column(name = "password")
@@ -33,6 +33,7 @@ public class User {
 
     @Column(name = "image")
     private String image;
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -142,5 +143,13 @@ public class User {
 
     public void setStatusList(List<Status> statusList) {
         this.statusList = statusList;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
