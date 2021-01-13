@@ -3,6 +3,7 @@ package com.mvc.model;
 import javax.persistence.*;
 import java.util.Date;
 
+
 @Entity
 @Table(name = "status")
 public class Status {
@@ -23,6 +24,7 @@ public class Status {
     private Date createdAt;
 
     private Date updatedAt;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

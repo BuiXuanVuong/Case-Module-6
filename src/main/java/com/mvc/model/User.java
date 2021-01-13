@@ -34,7 +34,7 @@ public class User {
     @Column(name = "image")
     private String image;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name="user_id"),
@@ -50,7 +50,7 @@ public class User {
     )
     private List<User> friends;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "friendships",
             joinColumns = @JoinColumn(name = "friend_id"),
