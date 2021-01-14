@@ -1,6 +1,8 @@
 package com.mvc.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -18,10 +20,12 @@ public class StatusReply {
 
     private String statusReplyBody;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User userWhoRepliedToStatus;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="status_id")
     private Status statusReplyingTo;

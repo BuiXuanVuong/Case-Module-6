@@ -29,7 +29,7 @@ public class Status {
 
     private Date updatedAt;
 
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User userPost;

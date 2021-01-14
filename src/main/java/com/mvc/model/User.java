@@ -62,7 +62,7 @@ public class User {
     )
     private List<User> userFriends;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "userPost", fetch = FetchType.EAGER)
     private List<Status> statusList;
 
