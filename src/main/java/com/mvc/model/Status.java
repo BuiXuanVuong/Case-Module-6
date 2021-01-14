@@ -1,7 +1,11 @@
 package com.mvc.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -26,9 +30,13 @@ public class Status {
     private Date updatedAt;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User userPost;
+
+
+    @OneToMany(mappedBy = "statusReplyingTo", fetch = FetchType.EAGER)
+    private List<StatusReply> repliedStatusMessages;
 
     public long getId() {
         return id;
@@ -78,7 +86,13 @@ public class Status {
         this.userPost = userPost;
     }
 
+    public List<StatusReply> getRepliedStatusMessages() {
+        return repliedStatusMessages;
+    }
 
+    public void setRepliedStatusMessages(List<StatusReply> repliedStatusMessages) {
+        this.repliedStatusMessages = repliedStatusMessages;
+    }
 
     @PrePersist
     protected void onCreate(){

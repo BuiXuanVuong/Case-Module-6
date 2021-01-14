@@ -1,5 +1,9 @@
 package com.mvc.model;
 
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +38,7 @@ public class User {
     @Column(name = "image")
     private String image;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name="user_id"),
@@ -42,7 +46,7 @@ public class User {
     )
     private List<Role> roles;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "friendships",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -50,7 +54,7 @@ public class User {
     )
     private List<User> friends;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "friendships",
             joinColumns = @JoinColumn(name = "friend_id"),
@@ -58,8 +62,12 @@ public class User {
     )
     private List<User> userFriends;
 
-    @OneToMany(mappedBy = "userPost", fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(mappedBy = "userPost", fetch = FetchType.EAGER)
     private List<Status> statusList;
+
+//    @OneToMany(mappedBy = "userWhoRepliedToStatus", fetch = FetchType.EAGER)
+//    private List<StatusReply> statusReplyList;
 
 //    @OneToMany(mappedBy = "messagePoster", fetch = FetchType.LAZY)
 //    private List<Message>
@@ -118,6 +126,16 @@ public class User {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public List<User> getFriends() {

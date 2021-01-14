@@ -33,7 +33,13 @@ public class StatusSevice {
         return statusRepository.findAll();
     };
 
+    public void deleteStatus(long id) {
+        statusRepository.deleteById(id);
+    }
 
+    public List<Status> findWallStatuses(Long user_wall_id) {
+        return statusRepository.findWallStatuses(user_wall_id);
+    }
 
 
 }

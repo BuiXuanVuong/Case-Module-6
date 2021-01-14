@@ -33,6 +33,7 @@ public class UserController {
         user.setPassword(userDetail.getPassword());
         user.setPhone(userDetail.getPhone());
         user.setImage(userDetail.getImage());
+        user.setUserFriends(userDetail.getUserFriends());
         user.setFriends(userDetail.getFriends());
         user.setStatusList(userDetail.getStatusList());
         User updateUser = userService.saveUser(user);
