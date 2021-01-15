@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -20,7 +21,7 @@ public class User {
     @GeneratedValue
     private long id;
 
-    @Column(name = "username")
+    @Column(name = "userName")
     private String userName;
 
     @Column(name = "password")
@@ -38,13 +39,14 @@ public class User {
     @Column(name = "image")
     private String image;
 
+
     @ManyToMany
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private List<Role> roles;
+    private Set<Role> roles;
 
     @ManyToMany
     @JoinTable(
@@ -201,4 +203,5 @@ public class User {
     public void setStatusReplyList(List<StatusReply> statusReplyList) {
         this.statusReplyList = statusReplyList;
     }
+
 }
