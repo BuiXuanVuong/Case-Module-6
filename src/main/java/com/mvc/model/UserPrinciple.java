@@ -49,7 +49,7 @@ public class UserPrinciple implements UserDetails {
         ).collect(Collectors.toList());
 
         return new UserPrinciple(
-                user.getId(),
+                    user.getId(),
                 user.getUserName(),
                 user.getPassword(),
                 user.getEmail(),
