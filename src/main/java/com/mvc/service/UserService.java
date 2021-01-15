@@ -30,6 +30,13 @@ public class UserService implements IUserService {
         userRepository.deleteById(id);
     }
 
+    public User findOneById(long id) {
+        return userRepository.findOneById(id);
+    }
+    public User findByName(String name) {
+        return userRepository.findOneByUserName(name);
+    }
+
 
     //JWT
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
