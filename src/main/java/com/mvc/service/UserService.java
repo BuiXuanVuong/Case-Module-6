@@ -23,5 +23,12 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public User findOneById(long id) {
+        return userRepository.findOneById(id);
+    }
+    public User findByName(String name) {
+        return userRepository.findOneByUserName(name);
+    }
+
 
 }

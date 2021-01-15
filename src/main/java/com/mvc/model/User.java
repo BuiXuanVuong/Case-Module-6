@@ -62,12 +62,28 @@ public class User {
     )
     private List<User> userFriends;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "invitations",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "friend_id")
+    )
+    private List<User> invitedFriends;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "invitations",
+            joinColumns = @JoinColumn(name = "friend_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> invitedUserFriends;
+
 
     @OneToMany(mappedBy = "userPost", fetch = FetchType.EAGER)
     private List<Status> statusList;
 
-//    @OneToMany(mappedBy = "userWhoRepliedToStatus", fetch = FetchType.EAGER)
-//    private List<StatusReply> statusReplyList;
+    @OneToMany(mappedBy = "userWhoRepliedToStatus")
+    private List<StatusReply> statusReplyList;
 
 //    @OneToMany(mappedBy = "messagePoster", fetch = FetchType.LAZY)
 //    private List<Message>
@@ -160,5 +176,29 @@ public class User {
 
     public void setStatusList(List<Status> statusList) {
         this.statusList = statusList;
+    }
+
+    public List<User> getInvitedFriends() {
+        return invitedFriends;
+    }
+
+    public void setInvitedFriends(List<User> invitedFriends) {
+        this.invitedFriends = invitedFriends;
+    }
+
+    public List<User> getInvitedUserFriends() {
+        return invitedUserFriends;
+    }
+
+    public void setInvitedUserFriends(List<User> invitedUserFriends) {
+        this.invitedUserFriends = invitedUserFriends;
+    }
+
+    public List<StatusReply> getStatusReplyList() {
+        return statusReplyList;
+    }
+
+    public void setStatusReplyList(List<StatusReply> statusReplyList) {
+        this.statusReplyList = statusReplyList;
     }
 }
