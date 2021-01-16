@@ -1,11 +1,8 @@
 package com.mvc.model;
 
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -46,6 +43,7 @@ public class User {
     )
     private List<Role> roles;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "friendships",
@@ -54,6 +52,7 @@ public class User {
     )
     private List<User> friends;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "friendships",
@@ -62,6 +61,7 @@ public class User {
     )
     private List<User> userFriends;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "invitations",

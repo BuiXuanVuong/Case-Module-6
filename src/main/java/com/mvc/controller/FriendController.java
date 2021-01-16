@@ -28,6 +28,31 @@ public class FriendController {
             loggedUser.setInvitedFriends(list);
         }
         userService.saveUser(loggedUser);
-        return loggedUser;
+        return connect_to_person;
+    }
+
+    @RequestMapping("/connect/{person_to_connect_id}")
+    public User connectWith(@PathVariable("person_to_connect_id") Long id) {
+        User loggedUser = userService.findByName("user8");
+        User connect_to_person = userService.findOneById(id);
+        if(loggedUser.getInvitedUserFriends().size() == 0) {
+            List<User> list = new ArrayList<>();
+            list.add(connect_to_person);
+            loggedUser.setUserFriends(list);
+            List<User> user_invitations = loggedUser.getInvitedUserFriends();
+            User inviting_user = userService.findOneById(id);
+            user_invitations.remove(inviting_user);
+            loggedUser.setInvitedUserFriends(user_invitations);
+        } else {
+            List<User> list = loggedUser.getUserFriends();
+            list.add(connect_to_person);
+            loggedUser.setUserFriends(list);
+            List<User> user_invitations = loggedUser.getInvitedUserFriends();
+            User inviting_user = userService.findOneById(id);
+            user_invitations.remove(inviting_user);
+            loggedUser.setInvitedUserFriends(user_invitations);
+        }
+        userService.saveUser(loggedUser);
+        return connect_to_person;
     }
 }

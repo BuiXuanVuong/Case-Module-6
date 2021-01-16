@@ -1,6 +1,5 @@
 package com.mvc.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -28,6 +27,9 @@ public class Status {
     private Date createdAt;
 
     private Date updatedAt;
+
+    @Column
+    private String imageURL;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -80,6 +82,23 @@ public class Status {
 
     public User getUserPost() {
         return userPost;
+    }
+
+//    public String getImages() {
+//        return images;
+//    }
+//
+//    public void setImages(String images) {
+//        this.images = images;
+//    }
+
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public void setUserPost(User userPost) {
