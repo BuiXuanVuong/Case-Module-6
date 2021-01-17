@@ -27,6 +27,7 @@ public class StatusReplyController {
     @Autowired
     StatusReplyService statusReplyService;
 
+
     @GetMapping("/status/reply/{status_id}")
     private List<StatusReply> getStatusReplies(@RequestBody StatusReply statusReply, BindingResult result, @PathVariable("status_id") Long id) {
         Status status = statusSevice.findOne(id);
@@ -38,7 +39,7 @@ public class StatusReplyController {
     private StatusReply replyToStatus(@RequestBody StatusReply statusReply, BindingResult result, @PathVariable("status_id") Long id, @PathVariable("user_that_replied_id") Long user_that_replied_id) {
 //
         //Grabbing logged in User Object
-        User loggedUser = userService.getUser(2);
+        User loggedUser = userService.getUser(1);
         //Using path variable ID to get status to reply to Object
         Status status_to_reply_to = statusSevice.findOne(id);
         //Setting the status we replied to
@@ -46,7 +47,8 @@ public class StatusReplyController {
         //Setting who replied (object) loggedUser
         statusReply.setUserWhoRepliedToStatus(loggedUser);
         //Saving
-         statusReplyService.saveStatusReply(statusReply);
+        statusReply.setUserReply(userService.getUser(user_that_replied_id).getUserName());
+        statusReplyService.saveStatusReply(statusReply);
         return statusReply;
     }
 

@@ -20,6 +20,10 @@ public class StatusReply {
 
     private String statusReplyBody;
 
+
+    @Column
+    private String userReply;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
@@ -58,6 +62,7 @@ public class StatusReply {
         this.userWhoRepliedToStatus = userWhoRepliedToStatus;
     }
 
+
     public Status getStatusReplyingTo() {
         return statusReplyingTo;
     }
@@ -90,5 +95,13 @@ public class StatusReply {
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = new Date();
+    }
+
+    public String getUserReply() {
+        return userReply;
+    }
+
+    public void setUserReply(String userReply) {
+        this.userReply = userReply;
     }
 }

@@ -28,10 +28,12 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         return userService.saveUser(user);
     }
+
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetail) {
         User user = userService.getUser(id);
         user.setBirthday(userDetail.getBirthday());
+        user.setUserName(userDetail.getUserName());
         user.setEmail(userDetail.getEmail());
         user.setPassword(userDetail.getPassword());
         user.setPhone(userDetail.getPhone());
