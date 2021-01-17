@@ -10,8 +10,6 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
-
 
     @Autowired
     private UserRepository userRepository;
@@ -34,6 +32,10 @@ public class UserService {
 
     public User findByName(String name) {
         return userRepository.findOneByUserName(name);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
     public List<User> searchByName(String name) {

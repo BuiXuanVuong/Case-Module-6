@@ -14,10 +14,10 @@ public class FriendController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/invite/{person_to_connect_id}")
-    public User inviteUser(@PathVariable("person_to_connect_id") long id) {
-        User loggedUser = userService.findByName("user1");
-        User connect_to_person = userService.findOneById(id);
+    @RequestMapping("/invite/{id_post}/{id_get}")
+    public User inviteUser(@PathVariable("id_post") long idPost, @PathVariable("id_get") long idGet) {
+        User loggedUser = userService.findOneById(idPost);
+        User connect_to_person = userService.findOneById(idGet);
         if (loggedUser.getInvitedUserFriends().size() == 0) {
             List<User> list = new ArrayList<>();
             list.add(connect_to_person);
@@ -31,16 +31,16 @@ public class FriendController {
         return connect_to_person;
     }
 
-    @RequestMapping("/connect/{person_to_connect_id}")
-    public User connectWith(@PathVariable("person_to_connect_id") Long id) {
-        User loggedUser = userService.findByName("user8");
-        User connect_to_person = userService.findOneById(id);
+    @RequestMapping("/connect/{idGet}/{idPost}")
+    public User connectWith(@PathVariable("idGet") Long idGet, @PathVariable("idPost") Long idPost) {
+        User loggedUser = userService.findOneById(idGet);
+        User connect_to_person = userService.findOneById(idPost);
         if(loggedUser.getInvitedUserFriends().size() == 0) {
             List<User> list = new ArrayList<>();
             list.add(connect_to_person);
             loggedUser.setUserFriends(list);
             List<User> user_invitations = loggedUser.getInvitedUserFriends();
-            User inviting_user = userService.findOneById(id);
+            User inviting_user = userService.findOneById(idPost);
             user_invitations.remove(inviting_user);
             loggedUser.setInvitedUserFriends(user_invitations);
         } else {
@@ -48,11 +48,26 @@ public class FriendController {
             list.add(connect_to_person);
             loggedUser.setUserFriends(list);
             List<User> user_invitations = loggedUser.getInvitedUserFriends();
-            User inviting_user = userService.findOneById(id);
+            User inviting_user = userService.findOneById(idPost);
             user_invitations.remove(inviting_user);
             loggedUser.setInvitedUserFriends(user_invitations);
         }
         userService.saveUser(loggedUser);
         return connect_to_person;
     }
+
+    @RequestMapping("/list-friend/{id}")
+    public List<User> getListFriend(@PathVariable("id") Long id) {
+        User selected_user_object = userService.findOneById(id);
+
+        List<User> list = new ArrayList<>();
+        for(User u: selected_user_object.getUserFriends()) {
+            list.add(u);
+        }
+        for(User u: selected_user_object.getFriends()) {
+            list.add(u);
+        }
+        return list;
+    }
+
 }
