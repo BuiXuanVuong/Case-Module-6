@@ -12,6 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findOneById(long id);
 
+    User findOneByUserName(String name);
 
     @Query(value = "SELECT * FROM friendships WHERE friend_id != ?1", nativeQuery = true)
     List<User> selectNotFriends(long id);
@@ -21,4 +22,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT email FROM users", nativeQuery = true)
     List<String> findAllEmails();
+
+    List<User> findByUserNameContaining(String name);
 }
