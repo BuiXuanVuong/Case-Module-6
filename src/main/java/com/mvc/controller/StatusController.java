@@ -34,7 +34,10 @@ public class StatusController {
         return statusSevice.findWallStatuses(id);
     }
 
-
+//    @GetMapping(value = {"/home/{idUser}/{idGuest}"})
+//    public List<Status> getAllStatusGuest(@PathVariable("idUser") Long idUser, @PathVariable("idGuest") Long idGuest) {
+//        return statusSevice.findWallStatuses(idGuest);
+//    }
 
 
     @PostMapping("/status/{id}")
