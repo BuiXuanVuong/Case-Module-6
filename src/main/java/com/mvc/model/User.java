@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -15,7 +16,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @Column(name = "username")
     private String userName;
@@ -36,12 +37,7 @@ public class User {
     private String image;
 
     @ManyToMany
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name="user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private List<Role> roles;
+    private Set<Role> roles;
 
     @JsonIgnore
     @ManyToMany
@@ -88,11 +84,11 @@ public class User {
 //    @OneToMany(mappedBy = "messagePoster", fetch = FetchType.LAZY)
 //    private List<Message>
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -146,11 +142,11 @@ public class User {
 
 
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
