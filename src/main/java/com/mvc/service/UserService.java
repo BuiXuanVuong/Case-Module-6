@@ -71,4 +71,9 @@ public class UserService implements IUserService {
     public User findByUserName(String username) {
         return userRepository.findOneByUserName(username);
     }
+
+//    public User save(User user) {
+//        return userRepository.save(user);
+//    }
+
 }

@@ -36,7 +36,7 @@ public class User {
     @Column(name = "image")
     private String image;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     @JsonIgnore
