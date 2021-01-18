@@ -15,22 +15,17 @@ public class SearchController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/search/{name}")
-    public ResponseEntity<List<User>> searchUser(@PathVariable String name) {
-        User loggedUser = userService.findByName("user1");
-        List<User> userListSearch = userService.searchByName(name);
+    @RequestMapping("/search/{idPost}")
+    public ResponseEntity<List<User>> searchUser(@PathVariable("idPost") Long idPost) {
+        User loggedUser = userService.findOneById(idPost);
+        List<User> userListSearch = userService.findAll();
         userListSearch.remove(loggedUser);
-        if(name == null) {
-            System.out.println("Empty input");
-        }
-
+//        if(name == null) {
+//            System.out.println("Empty input");
+//        }
         if(userListSearch.isEmpty()) {
             System.out.println("No match result");
         }
-
         return ResponseEntity.ok(userListSearch);
-
     }
-
-
 }
