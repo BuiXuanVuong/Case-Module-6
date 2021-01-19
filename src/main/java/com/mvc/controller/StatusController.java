@@ -43,19 +43,19 @@ public class StatusController {
 //    }
 
 
-    @PostMapping("/status/{id}")
-    public Status statusPostRoute(@PathVariable("id") Long id, @RequestBody Status status, BindingResult result, RedirectAttributes redirectAttributes) {
+    @PostMapping("/status/{userName}")
+    public Status statusPostRoute(@PathVariable("userName") String userName, @RequestBody Status status, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             System.out.println("DID NOT PASS STATUS VALIDATIONS: Status must be more than 2 characters");
 //            return "redirect:/";
             return null;
         } else {
-            User loggedUser = userService.getUser(id);
+            User loggedUser = userService.findByUserName(userName);
             List<Status> user_statuses = loggedUser.getStatusList();
             status.setUserPost(loggedUser);
-            status.setWallId(id);
+            status.setWallId(loggedUser.getId());
             loggedUser.setStatusList(user_statuses);
-            String string_id = id.toString();
+            String string_id = loggedUser.getId().toString();
             statusSevice.saveStatus(status);
             return status;
         }
