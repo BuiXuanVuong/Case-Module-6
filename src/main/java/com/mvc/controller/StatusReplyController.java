@@ -36,11 +36,11 @@ public class StatusReplyController {
     }
 
 
-    @PostMapping("/status/reply/{status_id}/{user_that_replied_id}")
-    private StatusReply replyToStatus(@RequestBody StatusReply statusReply, BindingResult result, @PathVariable("status_id") Long id, @PathVariable("user_that_replied_id") Long user_that_replied_id) {
+    @PostMapping("/status/reply/{status_id}/{user_that_replied}")
+    private StatusReply replyToStatus(@RequestBody StatusReply statusReply, BindingResult result, @PathVariable("status_id") Long id, @PathVariable("user_that_replied") String user_that_replied) {
 //
         //Grabbing logged in User Object
-        User loggedUser = userService.getUser(1);
+        User loggedUser = userService.findByUserName(user_that_replied);
         //Using path variable ID to get status to reply to Object
         Status status_to_reply_to = statusSevice.findOne(id);
         //Setting the status we replied to
@@ -48,7 +48,7 @@ public class StatusReplyController {
         //Setting who replied (object) loggedUser
         statusReply.setUserWhoRepliedToStatus(loggedUser);
         //Saving
-        statusReply.setUserReply(userService.getUser(user_that_replied_id).getUserName());
+        statusReply.setUserReply(user_that_replied);
         statusReplyService.saveStatusReply(statusReply);
         return statusReply;
     }
@@ -68,10 +68,5 @@ public class StatusReplyController {
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
     }
-
-
-
-
-
 
 }
