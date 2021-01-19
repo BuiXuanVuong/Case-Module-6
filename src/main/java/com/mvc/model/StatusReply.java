@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="statuses_replies")
@@ -37,6 +38,15 @@ public class StatusReply {
     private Date createdAt;
     private Date updatedAt;
 
+    private Integer totalLikes = 0;
+
+    public Integer getTotalLikes() {
+        return totalLikes;
+    }
+
+    public void setTotalLikes(Integer totalLikes) {
+        this.totalLikes = totalLikes;
+    }
 
     public long getId() {
         return id;

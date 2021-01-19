@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -31,6 +32,18 @@ public class Status {
     @Column
     private String imageURL;
 
+    public Integer getTotalLikes() {
+        return totalLikes;
+    }
+
+    public void setTotalLikes(Integer totalLikes) {
+        this.totalLikes = totalLikes;
+    }
+
+    @Column
+    private Integer totalLikes = 0;
+    private Integer totalComments = 0;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -39,6 +52,25 @@ public class Status {
 
     @OneToMany(mappedBy = "statusReplyingTo", fetch = FetchType.EAGER)
     private List<StatusReply> repliedStatusMessages;
+    @OneToMany(mappedBy = "status")
+    @JsonIgnore
+    private Set<StatusLike> likes;
+
+    public Integer getTotalComments() {
+        return totalComments;
+    }
+
+    public void setTotalComments(Integer totalComments) {
+        this.totalComments = totalComments;
+    }
+
+    public Set<StatusLike> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Set<StatusLike> likes) {
+        this.likes = likes;
+    }
 
     public long getId() {
         return id;
