@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@CrossOrigin("*")
+@CrossOrigin("*")
 public class SearchController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/search/{idPost}")
-    public ResponseEntity<List<User>> searchUser(@PathVariable("idPost") Long idPost) {
-        User loggedUser = userService.findOneById(idPost);
+    @RequestMapping("/search/{userName}")
+    public ResponseEntity<List<User>> searchUser(@PathVariable("userName") String userName) {
+        User loggedUser = userService.findByUserName(userName);
         List<User> userListSearch = userService.findAll();
         userListSearch.remove(loggedUser);
 //        if(name == null) {

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin("*")
 public class StatusController {
 
     @Autowired
@@ -28,10 +29,12 @@ public class StatusController {
     private StatusReplyService statusReplyService;
 
 
-    @GetMapping(value = {"/{id}", "/home/{id}"})
-    public List<Status> getAllStatus(@PathVariable("id") Long id) {
+    @GetMapping(value = {"/{userName}", "/home/{id}"})
+    public List<Status> getAllStatus(@PathVariable("userName") String userName) {
+        User user = userService.findByUserName(userName);
+        System.out.println(user.getId());
 //        statusReplyService.findAllByIdStatus(id);
-        return statusSevice.findWallStatuses(id);
+        return statusSevice.findWallStatuses(user.getId());
     }
 
 //    @GetMapping(value = {"/home/{idUser}/{idGuest}"})
