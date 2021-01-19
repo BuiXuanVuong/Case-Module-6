@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -84,7 +85,17 @@ public class User {
 
     @OneToMany(mappedBy = "userWhoRepliedToStatus")
     private List<StatusReply> statusReplyList;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<StatusLike> statusLikes;
 
+    public Set<StatusLike> getStatusLikes() {
+        return statusLikes;
+    }
+
+    public void setStatusLikes(Set<StatusLike> statusLikes) {
+        this.statusLikes = statusLikes;
+    }
 //    @OneToMany(mappedBy = "messagePoster", fetch = FetchType.LAZY)
 //    private List<Message>
 
