@@ -18,10 +18,10 @@ public class InviteController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/user/invite/{user_id}")
-    public List<User> inviteFriend(@PathVariable("user_id") Long id) {
+    @RequestMapping("/user/invite/{userName}")
+    public List<User> inviteFriend(@PathVariable("userName") String userName) {
         User loggedUser = userService.findByName("user1");
-        User selected_user_object = userService.findOneById(id);
+        User selected_user_object = userService.findByUserName(userName);
         List<User> inviting_users = selected_user_object.getInvitedUserFriends();
         return inviting_users;
     }

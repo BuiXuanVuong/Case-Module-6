@@ -15,9 +15,9 @@ public class FriendController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/invite/{id_post}/{id_get}")
-    public User inviteUser(@PathVariable("id_post") long idPost, @PathVariable("id_get") long idGet) {
-        User loggedUser = userService.findOneById(idPost);
+    @RequestMapping("/invite/{userName}/{id_get}")
+    public User inviteUser(@PathVariable("userName") String userName, @PathVariable("id_get") long idGet) {
+        User loggedUser = userService.findByUserName(userName);
         User connect_to_person = userService.findOneById(idGet);
         if (loggedUser.getInvitedUserFriends().size() == 0) {
             List<User> list = new ArrayList<>();
@@ -32,9 +32,9 @@ public class FriendController {
         return connect_to_person;
     }
 
-    @RequestMapping("/connect/{idGet}/{idPost}")
-    public User connectWith(@PathVariable("idGet") Long idGet, @PathVariable("idPost") Long idPost) {
-        User loggedUser = userService.findOneById(idGet);
+    @RequestMapping("/connect/{userName}/{idPost}")
+    public User connectWith(@PathVariable("userName") String userName, @PathVariable("idPost") Long idPost) {
+        User loggedUser = userService.findByUserName(userName);
         User connect_to_person = userService.findOneById(idPost);
         if(loggedUser.getInvitedUserFriends().size() == 0) {
             List<User> list = new ArrayList<>();
@@ -57,9 +57,9 @@ public class FriendController {
         return connect_to_person;
     }
 
-    @RequestMapping("/list-friend/{id}")
-    public List<User> getListFriend(@PathVariable("id") Long id) {
-        User selected_user_object = userService.findOneById(id);
+    @RequestMapping("/list-friend/{userName}")
+    public List<User> getListFriend(@PathVariable("userName") String userName) {
+        User selected_user_object = userService.findByUserName(userName);
 
         List<User> list = new ArrayList<>();
         for(User u: selected_user_object.getUserFriends()) {
