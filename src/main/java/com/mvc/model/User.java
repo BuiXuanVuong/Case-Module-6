@@ -89,6 +89,18 @@ public class User {
     @JsonIgnore
     private Set<StatusLike> statusLikes;
 
+    public Set<StatusReplyLike> getStatusReplyLikes() {
+        return statusReplyLikes;
+    }
+
+    public void setStatusReplyLikes(Set<StatusReplyLike> statusReplyLikes) {
+        this.statusReplyLikes = statusReplyLikes;
+    }
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<StatusReplyLike> statusReplyLikes;
+
     public Set<StatusLike> getStatusLikes() {
         return statusLikes;
     }
