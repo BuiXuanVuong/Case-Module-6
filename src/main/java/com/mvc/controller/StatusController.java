@@ -78,5 +78,20 @@ public class StatusController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("status/friend/{userNameFriend}")
+    public List<Status> getStatusFriend(@PathVariable("userNameFriend") String userNameFriend) {
+        User user_friend = userService.findByUserName(userNameFriend);
+        return statusSevice.findWallStatuses(user_friend.getId());
+    }
+
+    @RequestMapping("status/friend/{userLogin}/{userNameFriend}")
+    public Status statusFriend(@PathVariable("userNameLogin") String userNameLogin, @PathVariable("userNameFriend") String userNameFriend, @RequestBody Status status) {
+        User user_login = userService.findByUserName(userNameLogin);
+        User user_friend = userService.findByUserName(userNameFriend);
+        status.setUserPost(user_login);
+        status.setWallId(user_friend.getId());
+
+    }
+
 
 }
