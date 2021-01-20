@@ -84,13 +84,14 @@ public class StatusController {
         return statusSevice.findWallStatuses(user_friend.getId());
     }
 
-    @RequestMapping("status/friend/{userLogin}/{userNameFriend}")
+    @RequestMapping("status/friend/{userNameLogin}/{userNameFriend}")
     public Status statusFriend(@PathVariable("userNameLogin") String userNameLogin, @PathVariable("userNameFriend") String userNameFriend, @RequestBody Status status) {
         User user_login = userService.findByUserName(userNameLogin);
         User user_friend = userService.findByUserName(userNameFriend);
         status.setUserPost(user_login);
         status.setWallId(user_friend.getId());
-
+        statusSevice.saveStatus(status);
+        return status;
     }
 
 
