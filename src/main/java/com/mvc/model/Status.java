@@ -32,6 +32,9 @@ public class Status {
     @Column
     private String imageURL;
 
+    @Column
+    private String imageWhoPostStatus;
+
     public Integer getTotalLikes() {
         return totalLikes;
     }
