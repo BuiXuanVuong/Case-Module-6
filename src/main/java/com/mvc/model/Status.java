@@ -1,6 +1,7 @@
 package com.mvc.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.extern.apachecommons.CommonsLog;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -34,6 +35,9 @@ public class Status {
 
     @Column
     private String imageWhoPostStatus;
+
+    @Column
+    private String nameWhoPostStatus;
 
     public Integer getTotalLikes() {
         return totalLikes;
@@ -146,6 +150,22 @@ public class Status {
 
     public void setRepliedStatusMessages(List<StatusReply> repliedStatusMessages) {
         this.repliedStatusMessages = repliedStatusMessages;
+    }
+
+    public String getImageWhoPostStatus() {
+        return imageWhoPostStatus;
+    }
+
+    public void setImageWhoPostStatus(String imageWhoPostStatus) {
+        this.imageWhoPostStatus = imageWhoPostStatus;
+    }
+
+    public String getNameWhoPostStatus() {
+        return nameWhoPostStatus;
+    }
+
+    public void setNameWhoPostStatus(String nameWhoPostStatus) {
+        this.nameWhoPostStatus = nameWhoPostStatus;
     }
 
     @PrePersist

@@ -54,6 +54,8 @@ public class StatusController {
             List<Status> user_statuses = loggedUser.getStatusList();
             status.setUserPost(loggedUser);
             status.setWallId(loggedUser.getId());
+            status.setImageWhoPostStatus(loggedUser.getImage());
+            status.setNameWhoPostStatus(loggedUser.getUserName());
             loggedUser.setStatusList(user_statuses);
             String string_id = loggedUser.getId().toString();
             statusSevice.saveStatus(status);
@@ -90,9 +92,10 @@ public class StatusController {
         User user_friend = userService.findByUserName(userNameFriend);
         status.setUserPost(user_login);
         status.setWallId(user_friend.getId());
+        status.setNameWhoPostStatus(userNameLogin);
+        status.setImageWhoPostStatus(user_login.getImage());
         statusSevice.saveStatus(status);
         return status;
     }
-
 
 }
