@@ -49,6 +49,7 @@ public class StatusReplyController {
         statusReply.setUserWhoRepliedToStatus(loggedUser);
         //Saving
         statusReply.setUserReply(user_that_replied);
+        statusReply.setImageReply(loggedUser.getImage());
         statusReplyService.saveStatusReply(statusReply);
         return statusReply;
     }
