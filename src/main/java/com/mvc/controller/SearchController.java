@@ -15,7 +15,7 @@ public class SearchController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/search/{userName}")
+    @RequestMapping("/searchFriend/{userName}")
     public ResponseEntity<List<User>> searchUser(@PathVariable("userName") String userName) {
         User loggedUser = userService.findByUserName(userName);
         List<User> userListSearch = userService.findAll();

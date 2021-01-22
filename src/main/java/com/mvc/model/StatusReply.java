@@ -25,6 +25,8 @@ public class StatusReply {
     @Column
     private String userReply;
 
+    @Column String imageReply;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
@@ -113,5 +115,13 @@ public class StatusReply {
 
     public void setUserReply(String userReply) {
         this.userReply = userReply;
+    }
+
+    public String getImageReply() {
+        return imageReply;
+    }
+
+    public void setImageReply(String imageReply) {
+        this.imageReply = imageReply;
     }
 }
