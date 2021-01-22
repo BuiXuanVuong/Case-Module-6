@@ -3,6 +3,7 @@ package com.mvc.controller;
 import com.mvc.model.User;
 import com.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,10 +58,8 @@ public class UserController {
     @GetMapping("/search/{userName}")
     public ResponseEntity<User> getUserByUserName(@PathVariable("userName") String userName) {
         User user = userService.findByUserName(userName);
-        return ResponseEntity.ok(user);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
-
-
 
 
 }
