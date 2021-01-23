@@ -15,17 +15,17 @@ public class UserPrincipal implements UserDetails {
     private Long id;
     private String userName;
     private String password;
-    private boolean isNonBanned;
+//    private boolean isNonBanned;
     private Collection<? extends GrantedAuthority> roles;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
     }
-    public UserPrincipal(Long id, String userName, String password, boolean isNonBanned, Collection<? extends GrantedAuthority> roles) {
+    public UserPrincipal(Long id, String userName, String password,Collection<? extends GrantedAuthority> roles) {
         this.id = id;
         this.userName = userName;
         this.password = password;
-        this.isNonBanned= isNonBanned;
+//        this.isNonBanned= isNonBanned;
         this.roles = roles;
     }
     public static UserPrincipal buid(User user) {
@@ -36,7 +36,7 @@ public class UserPrincipal implements UserDetails {
                 user.getId(),
                 user.getUserName(),
                 user.getPassword(),
-                user.isNonBanned(),
+
                 authorities
         );
     }
@@ -48,15 +48,26 @@ public class UserPrincipal implements UserDetails {
     public String getUsername() {
         return userName;
     }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
+
     @Override
     public boolean isAccountNonLocked() {
-        return this.isNonBanned;
+        return true;
     }
-    @Override
+
+
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return this.isNonBanned;
+//    }
+
     public boolean isCredentialsNonExpired() {
         return true;
     }

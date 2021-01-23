@@ -34,7 +34,7 @@ public class UserController {
       return new ResponseEntity<>(userService.findByUserName(name), HttpStatus.OK) ;
     }
 
-    @PostMapping("users")
+    @PostMapping("/users")
     public User createUser(@RequestBody User user) {
         return userService.saveUser(user);
     }

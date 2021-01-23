@@ -35,21 +35,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostConstruct
-    public void init(){
-        List<User> users = (List<User>) userService.findAll();
-        if(users.isEmpty()){
-            User user = new User();
-            user.setUserName("admin");
-            user.setPassword(passwordEncoder.encode("admin"));
-            Set<Role> roles= new HashSet<>();
-            Role role= new Role();
-            role.setName("ROLE_ADMIN");
-            roles.add(role);
-            user.setRoles(roles);
-            userService.save(user);
-        }
-    }
+//    @PostConstruct
+//    public void init(){
+//        List<User> users = (List<User>) userService.findAll();
+//        if(users.isEmpty()){
+//            User user = new User();
+//            user.setUserName("admin");
+//            user.setPassword(passwordEncoder.encode("admin"));
+//            Set<Role> roles= new HashSet<>();
+//            Role role= new Role();
+//            role.setName("ROLE_ADMIN");
+//            roles.add(role);
+//            user.setRoles(roles);
+//            userService.save(user);
+//        }
+//    }
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -88,7 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
 
-                .antMatchers("/", "/login", "users").permitAll()
+                .antMatchers("/", "/login", "/users").permitAll()
                 .antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().authenticated().and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

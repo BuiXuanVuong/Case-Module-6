@@ -48,6 +48,7 @@ public class StatusReplyController {
         //Setting who replied (object) loggedUser
         statusReply.setUserWhoRepliedToStatus(loggedUser);
         //Saving
+        statusReply.setTotalLikes(statusReply.getTotalLikes() + 1);
         statusReply.setUserReply(user_that_replied);
         statusReply.setImageReply(loggedUser.getImage());
         statusReplyService.saveStatusReply(statusReply);
