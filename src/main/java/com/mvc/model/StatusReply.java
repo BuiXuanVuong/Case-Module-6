@@ -1,7 +1,11 @@
 package com.mvc.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="statuses_replies")
@@ -17,14 +21,34 @@ public class StatusReply {
 
     private String statusReplyBody;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @Column
+    private String userReply;
+
+    @Column String imageReply;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User userWhoRepliedToStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="status_id")
     private Status statusReplyingTo;
 
+    private Date createdAt;
+    private Date updatedAt;
+
+    private Integer totalLikes = 0;
+
+    public Integer getTotalLikes() {
+        return totalLikes;
+    }
+
+    public void setTotalLikes(Integer totalLikes) {
+        this.totalLikes = totalLikes;
+    }
 
     public long getId() {
         return id;
@@ -50,11 +74,54 @@ public class StatusReply {
         this.userWhoRepliedToStatus = userWhoRepliedToStatus;
     }
 
+
     public Status getStatusReplyingTo() {
         return statusReplyingTo;
     }
 
     public void setStatusReplyingTo(Status statusReplyingTo) {
         this.statusReplyingTo = statusReplyingTo;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = new Date();
+    }
+
+    public String getUserReply() {
+        return userReply;
+    }
+
+    public void setUserReply(String userReply) {
+        this.userReply = userReply;
+    }
+
+    public String getImageReply() {
+        return imageReply;
+    }
+
+    public void setImageReply(String imageReply) {
+        this.imageReply = imageReply;
     }
 }

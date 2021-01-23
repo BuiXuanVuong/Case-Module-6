@@ -3,14 +3,18 @@ package com.mvc.repository;
 import com.mvc.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAll();
 
     User findOneById(long id);
+
+    User findOneByUserName(String name);
 
 
     @Query(value = "SELECT * FROM friendships WHERE friend_id != ?1", nativeQuery = true)
@@ -21,4 +25,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT email FROM users", nativeQuery = true)
     List<String> findAllEmails();
+
+    List<User> findByUserNameContaining(String name);
+
+
 }
