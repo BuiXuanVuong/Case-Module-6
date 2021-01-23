@@ -3,6 +3,7 @@ package com.mvc.controller;
 import com.mvc.model.User;
 import com.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,15 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable long id) {
         User user = userService.getUser(id);
         return ResponseEntity.ok(user);
+    }
+    @GetMapping("/users")
+    public List<User> getAllUser(){
+        return userService.findAll();
+
+    }
+    @GetMapping("/users/findUserByName")
+    public ResponseEntity<User> findByNameContains(@RequestParam("name") String name){
+      return new ResponseEntity<>(userService.findByUserName(name), HttpStatus.OK) ;
     }
 
     @PostMapping("users")
@@ -53,6 +63,7 @@ public class UserController {
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
     }
+
 
 
 
