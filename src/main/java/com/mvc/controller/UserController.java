@@ -64,6 +64,11 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/search/{userName}")
+    public ResponseEntity<User> getUserByUserName(@PathVariable("userName") String userName) {
+        User user = userService.findByUserName(userName);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
 
 
 
