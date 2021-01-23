@@ -67,6 +67,7 @@ public class StatusController {
     public Status statusPutRoute(@PathVariable("id") Long id, @RequestBody Status statusUpdate, BindingResult result, RedirectAttributes redirectAttributes) {
         Status status = statusSevice.findOne(id);
         status.setContent(statusUpdate.getContent());
+        status.setImageURL(statusUpdate.getImageURL());
         statusSevice.saveTheStatus(status);
         return status;
     }
