@@ -90,7 +90,7 @@ public class StatusController {
         User user_friend = userService.findByUserName(userNameFriend);
         status.setUserPost(user_login);
         status.setWallId(user_friend.getId());
-
+        return status;
     }
 
 
