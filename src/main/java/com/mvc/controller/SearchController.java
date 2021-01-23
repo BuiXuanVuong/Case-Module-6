@@ -1,12 +1,15 @@
 package com.mvc.controller;
 
+import com.mvc.model.ResultResponse;
 import com.mvc.model.User;
 import com.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -15,7 +18,7 @@ public class SearchController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/search/{userName}")
+    @RequestMapping("/searchFriend/{userName}")
     public ResponseEntity<List<User>> searchUser(@PathVariable("userName") String userName) {
         User loggedUser = userService.findByUserName(userName);
         List<User> userListSearch = userService.findAll();
@@ -28,4 +31,8 @@ public class SearchController {
         }
         return ResponseEntity.ok(userListSearch);
     }
+
+
+
+
 }

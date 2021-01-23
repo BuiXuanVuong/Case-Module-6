@@ -30,13 +30,13 @@ public class StatusLikeController {
         return likeList;
     }
 
-    @PostMapping("/api/{user_id}/like/{status_id}")
-    private ResultResponse likeStatus(@PathVariable Long user_id, @PathVariable Long status_id){
+    @PostMapping("/api/{userName}/like/{status_id}")
+    private ResultResponse likeStatus(@PathVariable String userName, @PathVariable Long status_id){
         ResultResponse resultResponse = new ResultResponse();
         try {
             StatusLike statusLike = new StatusLike();
             Status status = statusSevice.findOne(status_id);
-            User user = userService.findOneById(user_id);
+            User user = userService.findByUserName(userName);
             status.setTotalLikes(status.getTotalLikes()+ 1);
             statusSevice.saveStatus(status);
             statusLike.setUser(user);
@@ -49,13 +49,13 @@ public class StatusLikeController {
         return resultResponse;
     }
 
-    @DeleteMapping("/api/{user_id}/unlike/{status_id}")
-    private ResultResponse unlikeStatus2(@PathVariable Long user_id, @PathVariable Long status_id){
+    @DeleteMapping("/api/{userName}/unlike/{status_id}")
+    private ResultResponse unlikeStatus2(@PathVariable String userName, @PathVariable Long status_id){
         ResultResponse resultResponse = new ResultResponse();
         try {
             StatusLike statusLike = new StatusLike();
             Status status = statusSevice.findOne(status_id);
-            User user = userService.findOneById(user_id);
+            User user = userService.findByUserName(userName);
             status.setTotalLikes(status.getTotalLikes()- 1);
             statusSevice.saveStatus(status);
             statusLike.setUser(user);

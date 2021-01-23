@@ -54,6 +54,8 @@ public class StatusController {
             List<Status> user_statuses = loggedUser.getStatusList();
             status.setUserPost(loggedUser);
             status.setWallId(loggedUser.getId());
+            status.setImageWhoPostStatus(loggedUser.getImage());
+            status.setNameWhoPostStatus(loggedUser.getUserName());
             loggedUser.setStatusList(user_statuses);
             String string_id = loggedUser.getId().toString();
             statusSevice.saveStatus(status);
@@ -65,6 +67,7 @@ public class StatusController {
     public Status statusPutRoute(@PathVariable("id") Long id, @RequestBody Status statusUpdate, BindingResult result, RedirectAttributes redirectAttributes) {
         Status status = statusSevice.findOne(id);
         status.setContent(statusUpdate.getContent());
+        status.setImageURL(statusUpdate.getImageURL());
         statusSevice.saveTheStatus(status);
         return status;
     }
@@ -84,12 +87,16 @@ public class StatusController {
         return statusSevice.findWallStatuses(user_friend.getId());
     }
 
-    @RequestMapping("status/friend/{userLogin}/{userNameFriend}")
+
+    @RequestMapping("status/friend/{userNameLogin}/{userNameFriend}")
     public Status statusFriend(@PathVariable("userNameLogin") String userNameLogin, @PathVariable("userNameFriend") String userNameFriend, @RequestBody Status status) {
         User user_login = userService.findByUserName(userNameLogin);
         User user_friend = userService.findByUserName(userNameFriend);
         status.setUserPost(user_login);
         status.setWallId(user_friend.getId());
+        status.setNameWhoPostStatus(userNameLogin);
+        status.setImageWhoPostStatus(user_login.getImage());
+        statusSevice.saveStatus(status);
         return status;
     }
 
