@@ -19,20 +19,24 @@ public class SearchController {
     private UserService userService;
 
     @RequestMapping("/searchFriend/{userName}")
-    public ResponseEntity<List<User>> searchUser(@PathVariable("userName") String userName) {
+    public ResponseEntity<List<User>> searchUser(@PathVariable("userName") String userName, Optional<String> search) {
         User loggedUser = userService.findByUserName(userName);
-        List<User> userListSearch = userService.findAll();
-        userListSearch.remove(loggedUser);
+        List<User> userList;
+        if (search.isPresent()) {
+            userList = userService.searchByName(search);
+            if (userList.contains(loggedUser)) {
+                userList.remove(loggedUser);
+            }
+        } else {
+            userList = userService.findAll();
+            userList.remove(loggedUser);
 //        if(name == null) {
 //            System.out.println("Empty input");
 //        }
-        if(userListSearch.isEmpty()) {
-            System.out.println("No match result");
+            if (userList.isEmpty()) {
+                System.out.println("No match result");
+            }
         }
-        return ResponseEntity.ok(userListSearch);
+        return ResponseEntity.ok(userList);
     }
-
-
-
-
 }
