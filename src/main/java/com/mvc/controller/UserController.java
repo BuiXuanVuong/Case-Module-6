@@ -39,11 +39,11 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetail) {
-        User user = userService.getUser(id);
+    @PutMapping("/users/{username}")
+    public ResponseEntity<User> updateUser(@PathVariable String userName, @RequestBody User userDetail) {
+        User user = userService.findByUserName(userName);
         user.setBirthday(userDetail.getBirthday());
-        user.setUserName(userDetail.getUserName());
+//        user.setUserName(userDetail.getUserName());
         user.setEmail(userDetail.getEmail());
         user.setPassword(userDetail.getPassword());
         user.setPhone(userDetail.getPhone());
