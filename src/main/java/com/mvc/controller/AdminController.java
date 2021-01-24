@@ -26,10 +26,16 @@ public class AdminController {
     @Autowired
     private RoleService roleService;
     @GetMapping("/users")
-    public ResponseEntity<Iterable<User>> getAll() {
-        Iterable<User> users = userService.findAll();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+    public ResponseEntity<Iterable<User>> getAll(@RequestParam("search")Optional<String> search) {
+        if(search.isPresent()){
+            Iterable<User> users = userService.searchByName(search);
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        } else {
+            Iterable<User> users = userService.findAll();
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        }
     }
+
     @GetMapping("/users/")
     @PutMapping("/users/{id}/block")
     public ResponseEntity<User> blockUser(@PathVariable Long id, @RequestBody User user) {

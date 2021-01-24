@@ -63,7 +63,7 @@ public class UserService implements IUserService {
         userRepository.deleteById(id);
     }
 
-    public List<User> searchByName(String name) {
+    public List<User> searchByName(Optional<String> name) {
         return userRepository.findByUserNameContaining(name);
     }
 
