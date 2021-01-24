@@ -34,6 +34,10 @@ public class Message {
 
     private long user_wall_id;
 
+    private String sender;
+
+    private String imageSender;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
@@ -101,6 +105,23 @@ public class Message {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public String getImageSender() {
+        return imageSender;
+    }
+
+    public void setImageSender(String imageSender) {
+        this.imageSender = imageSender;
+    }
+
     @PrePersist
     protected void onCreate(){
         this.createdAt = new Date();
