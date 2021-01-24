@@ -1,13 +1,16 @@
 package com.mvc.controller;
 
+import com.mvc.model.ResultResponse;
 import com.mvc.model.User;
 import com.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -42,5 +45,6 @@ public class SearchController {
         }
         return ResponseEntity.ok(userListSearch);
     }
+
 
 }
