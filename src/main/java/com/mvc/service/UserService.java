@@ -26,9 +26,7 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    public void deleteUser(long id) {
-        userRepository.deleteById(id);
-    }
+
 
     public User findOneById(long id) {
         return userRepository.findOneById(id);
@@ -46,7 +44,8 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    
+
+
 
 //    @Override
 //    public Optional<User> findOneByStatusId(long id) {

@@ -39,9 +39,9 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetail) {
-        User user = userService.getUser(id);
+    @PutMapping("/users/{userName}")
+    public ResponseEntity<User> updateUser(@PathVariable String userName, @RequestBody User userDetail) {
+        User user = userService.getUser(userName);
         user.setBirthday(userDetail.getBirthday());
         user.setUserName(userDetail.getUserName());
         user.setEmail(userDetail.getEmail());
@@ -55,14 +55,14 @@ public class UserController {
         return ResponseEntity.ok(updateUser);
     }
 
-    @DeleteMapping("/users/{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteUsers(@PathVariable long id) {
-        User user = userService.getUser(id);
-        userService.deleteUser(id);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return ResponseEntity.ok(response);
-    }
+//    @DeleteMapping("/users/{userName}")
+//    public ResponseEntity<Map<String, Boolean>> deleteUsers(@PathVariable String userName) {
+//        User user = userService.getUser(userName);
+//        userService.deleteUser(userName);
+//        Map<String, Boolean> response = new HashMap<>();
+//        response.put("deleted", Boolean.TRUE);
+//        return ResponseEntity.ok(response);
+//    }
 
     @GetMapping("/search/{userName}")
     public ResponseEntity<User> getUserByUserName(@PathVariable("userName") String userName) {
