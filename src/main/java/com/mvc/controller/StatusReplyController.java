@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -34,6 +35,10 @@ public class StatusReplyController {
         Status status = statusSevice.findOne(id);
         return status.getRepliedStatusMessages();
     }
+    @GetMapping("/status/reply/{status_reply_id}")
+    public Optional<StatusReply> getSingleComment(@PathVariable Long status_reply_id){
+        return statusReplyService.findById(status_reply_id);
+    }
 
 
     @PostMapping("/status/reply/{status_id}/{user_that_replied}")
@@ -48,20 +53,20 @@ public class StatusReplyController {
         //Setting who replied (object) loggedUser
         statusReply.setUserWhoRepliedToStatus(loggedUser);
         //Saving
-        statusReply.setTotalLikes(statusReply.getTotalLikes() + 1);
+
         statusReply.setUserReply(user_that_replied);
         statusReply.setImageReply(loggedUser.getImage());
         statusReplyService.saveStatusReply(statusReply);
         return statusReply;
     }
 
-    @PutMapping("/status/reply/{status_replied_id}/{user_that_replied_id}")
-    private StatusReply updateReplyToStatus(@RequestBody StatusReply updateStatusReply, BindingResult result, @PathVariable("status_replied_id") Long id, @PathVariable("user_that_replied_id") Long user_that_replied_id) {
-        StatusReply statusReply = statusReplyService.findOne(id);
-        statusReply.setStatusReplyBody(updateStatusReply.getStatusReplyBody());
-        statusReplyService.saveStatusReply(statusReply);
-        return statusReply;
-    }
+//    @PutMapping("/status/reply/{status_replied_id}/{user_that_replied}")
+//    private StatusReply updateReplyToStatus(@RequestBody StatusReply updateStatusReply, BindingResult result, @PathVariable("status_replied_id") Long id, @PathVariable("user_that_replied") Long user_that_replied) {
+//        StatusReply statusReply = statusReplyService.findOne(id);
+//        statusReply.setStatusReplyBody(updateStatusReply.getStatusReplyBody());
+//        statusReplyService.saveStatusReply(statusReply);
+//        return statusReply;
+//    }
 
     @DeleteMapping("/status/reply/{status_replied_id}")
     public ResponseEntity<Map<String, Boolean>> deleteStatusReply(@PathVariable("status_replied_id") Long status_replied_id) {
@@ -69,6 +74,18 @@ public class StatusReplyController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
+    }
+    @PutMapping("/status/reply/{status_replied_id}/{user_that_replied}/{user_login}")
+    private StatusReply updateReplyToStatus(@RequestBody StatusReply updateStatusReply, BindingResult result, @PathVariable("status_replied_id") Long id, @PathVariable("user_that_replied") String user_that_replied, @PathVariable("user_login") String user_login) {
+        User userReply = userService.findByUserName(user_that_replied);
+        User userLogin = userService.findByUserName(user_login);
+        if (userReply == userLogin ) {
+            StatusReply statusReply = statusReplyService.findOne(id);
+            statusReply.setStatusReplyBody(updateStatusReply.getStatusReplyBody());
+            statusReplyService.saveStatusReply(statusReply);
+            return statusReply;
+        }
+        return null;
     }
 
 }

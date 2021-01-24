@@ -5,6 +5,7 @@ import com.mvc.repository.StatusReplyRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StatusReplyService {
@@ -28,6 +29,9 @@ public class StatusReplyService {
 
     public List<StatusReply> findAllByIdStatus(long id) {
        return statusReplyRepository.findAllById(id);
+    }
+    public Optional<StatusReply> findById(Long status_reply_id) {
+        return statusReplyRepository.findById(status_reply_id);
     }
 
 }

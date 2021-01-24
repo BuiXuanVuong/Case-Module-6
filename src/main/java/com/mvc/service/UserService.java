@@ -18,8 +18,8 @@ public class UserService implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User getUser(long id) {
-        return userRepository.findOneById(id);
+    public User getUser(String userName) {
+        return userRepository.findOneByUserName(userName);
     }
 
     public User saveUser(User user) {

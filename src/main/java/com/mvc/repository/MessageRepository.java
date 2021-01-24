@@ -13,4 +13,5 @@ public interface MessageRepository extends CrudRepository<Message, Long> {
     List<Message> findWallMessages(Long user_wall_id);
 
     Message findOneById(Long id);
+
 }

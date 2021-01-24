@@ -45,6 +45,7 @@ public class Message {
     private Date createdAt;
 
     private Date updatedAt;
+    private Integer totalMessage = 0;
 
     public List<MessageReply> getRepliedMessageMessages() {
         return repliedMessageMessages;
