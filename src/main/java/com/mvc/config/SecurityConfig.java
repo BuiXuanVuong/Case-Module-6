@@ -35,21 +35,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostConstruct
-    public void init(){
-        List<User> users = (List<User>) userService.findAll();
-        if(users.isEmpty()){
-            User user = new User();
-            user.setUserName("admin");
-            user.setPassword(passwordEncoder.encode("admin"));
-            Set<Role> roles= new HashSet<>();
-            Role role= new Role();
-            role.setName("ROLE_ADMIN");
-            roles.add(role);
-            user.setRoles(roles);
-            userService.save(user);
-        }
-    }
+//    @PostConstruct
+//    public void init(){
+//        List<User> users = (List<User>) userService.findAll();
+//        if(users.isEmpty()){
+//            User user = new User();
+//            user.setUserName("admin");
+//            user.setPassword(passwordEncoder.encode("admin"));
+//            Set<Role> roles= new HashSet<>();
+//            Role role= new Role();
+//            role.setName("ROLE_ADMIN");
+//            roles.add(role);
+//            user.setRoles(roles);
+//            userService.save(user);
+//        }
+//    }
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
