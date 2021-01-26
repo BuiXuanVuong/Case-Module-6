@@ -1,4 +1,5 @@
 package com.mvc.controller;
+
 import com.mvc.model.User;
 import com.mvc.service.JwtService;
 import com.mvc.service.RoleService;
@@ -9,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.Optional;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/admin")
@@ -23,6 +26,7 @@ public class AdminController {
     @Autowired
     private RoleService roleService;
     @GetMapping("/users")
+
     public ResponseEntity<Iterable<User>> getAll(@RequestParam("search")Optional<String> search) {
         if(search.isPresent()){
             Iterable<User> users = userService.searchByName(search);
@@ -31,6 +35,7 @@ public class AdminController {
             Iterable<User> users = userService.findAll();
             return new ResponseEntity<>(users, HttpStatus.OK);
         }
+
     }
     @GetMapping("/users/")
     @PutMapping("/users/{id}/block")
@@ -39,7 +44,9 @@ public class AdminController {
         if (!userOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
 //        userOptional.get().setNonBanned(false);
+
         userService.save(userOptional.get());
         return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
     }
@@ -49,8 +56,10 @@ public class AdminController {
         if (!userOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
 //        userOptional.get().setNonBanned(true);
         userService.save(userOptional.get());
         return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
     }
 }
+
