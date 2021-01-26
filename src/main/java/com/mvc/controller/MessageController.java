@@ -28,6 +28,8 @@ public class MessageController {
         User userGet = userService.findByUserName(userPath);
         message.setMessagePoster(loggedUser);
         message.setUser_wall_id(userGet.getId());
+        message.setSender(loggedUser.getUserName());
+        message.setImageSender(loggedUser.getImage());
         messageService.saveMessage(message);
         return message;
     }
@@ -39,6 +41,7 @@ public class MessageController {
 //        statusReplyService.findAllByIdStatus(id);
         return messageService.findWallMessages(user.getId());
     }
+
 
 
 }

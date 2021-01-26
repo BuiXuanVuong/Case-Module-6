@@ -54,12 +54,17 @@ public class StatusReplyController {
         return statusReply;
     }
 
-    @PutMapping("/status/reply/{status_replied_id}/{user_that_replied_id}")
-    private StatusReply updateReplyToStatus(@RequestBody StatusReply updateStatusReply, BindingResult result, @PathVariable("status_replied_id") Long id, @PathVariable("user_that_replied_id") Long user_that_replied_id) {
-        StatusReply statusReply = statusReplyService.findOne(id);
-        statusReply.setStatusReplyBody(updateStatusReply.getStatusReplyBody());
-        statusReplyService.saveStatusReply(statusReply);
-        return statusReply;
+    @PutMapping("/status/reply/{status_replied_id}/{user_that_replied}/{user_login}")
+    private StatusReply updateReplyToStatus(@RequestBody StatusReply updateStatusReply, BindingResult result, @PathVariable("status_replied_id") Long id, @PathVariable("user_that_replied") String user_that_replied, @PathVariable("user_login") String user_login) {
+        User userReply = userService.findByUserName(user_that_replied);
+        User userLogin = userService.findByUserName(user_login);
+        if (userReply == userLogin ) {
+            StatusReply statusReply = statusReplyService.findOne(id);
+            statusReply.setStatusReplyBody(updateStatusReply.getStatusReplyBody());
+            statusReplyService.saveStatusReply(statusReply);
+            return statusReply;
+        }
+        return null;
     }
 
     @DeleteMapping("/status/reply/{status_replied_id}")

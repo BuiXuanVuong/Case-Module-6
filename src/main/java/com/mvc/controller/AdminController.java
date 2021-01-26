@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 import java.util.Optional;
 
 @RestController
@@ -26,9 +26,16 @@ public class AdminController {
     @Autowired
     private RoleService roleService;
     @GetMapping("/users")
-    public ResponseEntity<Iterable<User>> getAll() {
-        Iterable<User> users = userService.findAll();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+
+    public ResponseEntity<Iterable<User>> getAll(@RequestParam("search")Optional<String> search) {
+        if(search.isPresent()){
+            Iterable<User> users = userService.searchByName(search);
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        } else {
+            Iterable<User> users = userService.findAll();
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        }
+
     }
     @GetMapping("/users/")
     @PutMapping("/users/{id}/block")
@@ -37,7 +44,9 @@ public class AdminController {
         if (!userOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        userOptional.get().setNonBanned(false);
+
+//        userOptional.get().setNonBanned(false);
+
         userService.save(userOptional.get());
         return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
     }
@@ -47,8 +56,10 @@ public class AdminController {
         if (!userOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        userOptional.get().setNonBanned(true);
+
+//        userOptional.get().setNonBanned(true);
         userService.save(userOptional.get());
         return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
     }
 }
+
