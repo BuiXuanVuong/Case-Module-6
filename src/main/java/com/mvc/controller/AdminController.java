@@ -44,9 +44,6 @@ public class AdminController {
         if (!userOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-//        userOptional.get().setNonBanned(false);
-
         userService.save(userOptional.get());
         return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
     }
@@ -56,8 +53,6 @@ public class AdminController {
         if (!userOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-//        userOptional.get().setNonBanned(true);
         userService.save(userOptional.get());
         return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
     }
