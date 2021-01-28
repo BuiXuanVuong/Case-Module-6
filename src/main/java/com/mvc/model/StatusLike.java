@@ -3,8 +3,6 @@ package com.mvc.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -37,7 +35,6 @@ public class StatusLike {
 
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
-//    @EqualsAndHashCode.Exclude
     private Status status;
 
     @ManyToOne

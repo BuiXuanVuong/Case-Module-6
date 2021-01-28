@@ -3,7 +3,7 @@ package com.mvc.controller;
 
 import com.mvc.model.JwtResponse;
 import com.mvc.model.User;
-import com.mvc.service.JwtService;
+import com.mvc.service.impl.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

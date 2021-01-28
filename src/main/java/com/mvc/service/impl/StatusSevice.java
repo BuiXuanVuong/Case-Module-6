@@ -1,4 +1,4 @@
-package com.mvc.service;
+package com.mvc.service.impl;
 
 import com.mvc.model.Status;
 import com.mvc.repository.StatusRepository;

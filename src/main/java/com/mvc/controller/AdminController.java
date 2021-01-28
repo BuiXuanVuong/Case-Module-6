@@ -1,8 +1,8 @@
 package com.mvc.controller;
 import com.mvc.model.User;
-import com.mvc.service.JwtService;
-import com.mvc.service.RoleService;
-import com.mvc.service.UserService;
+import com.mvc.service.impl.JwtService;
+import com.mvc.service.impl.RoleService;
+import com.mvc.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

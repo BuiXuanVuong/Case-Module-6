@@ -1,8 +1,9 @@
-package com.mvc.service;
+package com.mvc.service.impl;
 
 import com.mvc.model.User;
 import com.mvc.model.UserPrincipal;
 import com.mvc.repository.UserRepository;
+import com.mvc.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,7 +14,6 @@ import java.util.Optional;
 
 @Service
 public class UserService implements IUserService {
-
 
     @Autowired
     private UserRepository userRepository;

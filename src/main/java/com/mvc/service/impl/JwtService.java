@@ -1,4 +1,4 @@
-package com.mvc.service;
+package com.mvc.service.impl;
 
 import com.mvc.model.UserPrincipal;
 import io.jsonwebtoken.*;

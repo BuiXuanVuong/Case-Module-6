@@ -5,8 +5,8 @@ import com.mvc.model.Status;
 import com.mvc.model.StatusLike;
 import com.mvc.model.User;
 import com.mvc.service.StatusLikeService;
-import com.mvc.service.StatusSevice;
-import com.mvc.service.UserService;
+import com.mvc.service.impl.StatusSevice;
+import com.mvc.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

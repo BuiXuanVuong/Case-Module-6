@@ -1,8 +1,7 @@
 package com.mvc.model;
 
-import com.mvc.service.UserService;
+import com.mvc.service.impl.UserService;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;

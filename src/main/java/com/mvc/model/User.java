@@ -103,8 +103,6 @@ public class User {
     public void setStatusLikes(Set<StatusLike> statusLikes) {
         this.statusLikes = statusLikes;
     }
-//    @OneToMany(mappedBy = "messagePoster", fetch = FetchType.LAZY)
-//    private List<Message>
 
     public Long getId() {
         return id;

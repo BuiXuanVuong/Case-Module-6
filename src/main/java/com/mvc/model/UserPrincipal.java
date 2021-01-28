@@ -4,9 +4,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,8 +42,6 @@ public class UserPrincipal implements UserDetails {
         this.roles = roles;
     }
 
-
-
     public static UserPrincipal buid(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
                 new SimpleGrantedAuthority(role.getName())
@@ -62,10 +57,6 @@ public class UserPrincipal implements UserDetails {
                 authorities
         );
     }
-
-
-
-
 
     @Override
     public String getPassword() {

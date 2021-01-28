@@ -1,7 +1,7 @@
 package com.mvc.controller;
 
 import com.mvc.model.User;
-import com.mvc.service.UserService;
+import com.mvc.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

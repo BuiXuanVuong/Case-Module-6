@@ -1,7 +1,8 @@
-package com.mvc.service;
+package com.mvc.service.impl;
 
 import com.mvc.model.Role;
 import com.mvc.repository.RoleRepository;
+import com.mvc.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

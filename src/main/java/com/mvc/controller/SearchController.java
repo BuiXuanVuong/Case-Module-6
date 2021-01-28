@@ -1,7 +1,7 @@
 package com.mvc.controller;
 
 import com.mvc.model.User;
-import com.mvc.service.UserService;
+import com.mvc.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,33 +19,6 @@ public class SearchController {
     @Autowired
     private UserService userService;
 
-//    @RequestMapping("/searchFriend/{userName}")
-//    public ResponseEntity<List<User>> searchUser(@PathVariable("userName") String userName) {
-//        User loggedUser = userService.findByUserName(userName);
-//        List<User> userListSearch = userService.findAll();
-//
-//        List<User> list = new ArrayList<>();
-//        for(User u: loggedUser.getUserFriends()) {
-//            list.add(u);
-//        }
-//        for(User u: loggedUser.getFriends()) {
-//            list.add(u);
-//        }
-//
-//        for(User user: list) {
-//            userListSearch.remove(user);
-//        }
-//
-//        userListSearch.remove(loggedUser);
-////        if(name == null) {
-////            System.out.println("Empty input");
-////        }
-//        if(userListSearch.isEmpty()) {
-//            System.out.println("No match result");
-//        }
-//        return ResponseEntity.ok(userListSearch);
-//    }
-
     @RequestMapping("/searchFriend/{userName}")
     public ResponseEntity<List<User>> searchUser(@PathVariable("userName") String userName, Optional<String> search) {
         User loggedUser = userService.findByUserName(userName);
@@ -58,9 +31,6 @@ public class SearchController {
         } else {
             userList = userService.findAll();
             userList.remove(loggedUser);
-//        if(name == null) {
-//            System.out.println("Empty input");
-//        }
             if (userList.isEmpty()) {
                 System.out.println("No match result");
             }

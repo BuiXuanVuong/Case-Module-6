@@ -1,14 +1,11 @@
 package com.mvc.controller;
 
 import com.mvc.model.Message;
-import com.mvc.model.Status;
 import com.mvc.model.User;
-import com.mvc.service.MessageService;
-import com.mvc.service.UserService;
+import com.mvc.service.impl.MessageService;
+import com.mvc.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -38,7 +35,6 @@ public class MessageController {
     public List<Message> getAllMessage(@PathVariable("userLogin") String userLogin) {
         User user = userService.findByUserName(userLogin);
         System.out.println(user.getId());
-//        statusReplyService.findAllByIdStatus(id);
         return messageService.findWallMessages(user.getId());
     }
 

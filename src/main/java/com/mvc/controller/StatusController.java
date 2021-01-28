@@ -2,9 +2,9 @@ package com.mvc.controller;
 
 import com.mvc.model.Status;
 import com.mvc.model.User;
-import com.mvc.service.StatusReplyService;
-import com.mvc.service.StatusSevice;
-import com.mvc.service.UserService;
+import com.mvc.service.impl.StatusReplyService;
+import com.mvc.service.impl.StatusSevice;
+import com.mvc.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -33,21 +33,13 @@ public class StatusController {
     public List<Status> getAllStatus(@PathVariable("userName") String userName) {
         User user = userService.findByUserName(userName);
         System.out.println(user.getId());
-//        statusReplyService.findAllByIdStatus(id);
         return statusSevice.findWallStatuses(user.getId());
     }
-
-//    @GetMapping(value = {"/home/{idUser}/{idGuest}"})
-//    public List<Status> getAllStatusGuest(@PathVariable("idUser") Long idUser, @PathVariable("idGuest") Long idGuest) {
-//        return statusSevice.findWallStatuses(idGuest);
-//    }
-
 
     @PostMapping("/status/{userName}")
     public Status statusPostRoute(@PathVariable("userName") String userName, @RequestBody Status status, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             System.out.println("DID NOT PASS STATUS VALIDATIONS: Status must be more than 2 characters");
-//            return "redirect:/";
             return null;
         } else {
             User loggedUser = userService.findByUserName(userName);

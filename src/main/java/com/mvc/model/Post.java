@@ -13,8 +13,6 @@ public class Post {
     @Column(name = "image", columnDefinition = "TEXT")
     private String image;
 
-//    @Column(name = " ")
-
     @Column(name = "content")
     private String content;
 

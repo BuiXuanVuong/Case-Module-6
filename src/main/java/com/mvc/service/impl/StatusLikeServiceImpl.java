@@ -1,16 +1,17 @@
-package com.mvc.service;
+package com.mvc.service.impl;
 
 import com.mvc.model.StatusLike;
 import com.mvc.repository.StatusLikeRepository;
 import com.mvc.repository.StatusRepository;
 import com.mvc.repository.UserRepository;
+import com.mvc.service.StatusLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 @Service
-public class StatusLikeServiceImpl implements StatusLikeService{
+public class StatusLikeServiceImpl implements StatusLikeService {
     @Autowired
     private StatusLikeRepository statusLikeRepository;
 

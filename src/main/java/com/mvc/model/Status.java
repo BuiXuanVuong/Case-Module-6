@@ -1,7 +1,6 @@
 package com.mvc.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.extern.apachecommons.CommonsLog;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -122,15 +121,6 @@ public class Status {
     public User getUserPost() {
         return userPost;
     }
-
-//    public String getImages() {
-//        return images;
-//    }
-//
-//    public void setImages(String images) {
-//        this.images = images;
-//    }
-
 
     public String getImageURL() {
         return imageURL;

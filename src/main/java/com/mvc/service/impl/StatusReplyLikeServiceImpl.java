@@ -1,7 +1,8 @@
-package com.mvc.service;
+package com.mvc.service.impl;
 
 import com.mvc.model.StatusReplyLike;
 import com.mvc.repository.StatusReplyLikeRepository;
+import com.mvc.service.StatusReplyLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
