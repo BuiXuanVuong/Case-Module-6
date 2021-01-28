@@ -4,43 +4,32 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserPrincipal implements UserDetails {
-
     private Long id;
-
     private String userName;
-
     private String password;
-
-    private String email;
-
-    private String phone;
-
-    private String birthday;
-
-    private String image;
-
+    private boolean isNonBanned;
     private Collection<? extends GrantedAuthority> roles;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
     }
-
-    public UserPrincipal(Long id, String userName, String password, String email, String phone, String birthday, String image, Collection<? extends GrantedAuthority> roles) {
+    public UserPrincipal(Long id, String userName, String password, boolean isNonBanned, Collection<? extends GrantedAuthority> roles) {
         this.id = id;
         this.userName = userName;
         this.password = password;
-        this.email = email;
-        this.phone = phone;
-        this.birthday = birthday;
-        this.image = image;
+        this.isNonBanned= isNonBanned;
         this.roles = roles;
     }
+
+
 
     public static UserPrincipal buid(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
@@ -50,39 +39,30 @@ public class UserPrincipal implements UserDetails {
                 user.getId(),
                 user.getUserName(),
                 user.getPassword(),
-                user.getEmail(),
-                user.getBirthday(),
-                user.getImage(),
-                user.getPhone(),
+                user.isNonBanned(),
                 authorities
         );
     }
-
     @Override
     public String getPassword() {
         return password;
     }
-
     @Override
     public String getUsername() {
         return userName;
     }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.isNonBanned;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     @Override
     public boolean isEnabled() {
         return true;

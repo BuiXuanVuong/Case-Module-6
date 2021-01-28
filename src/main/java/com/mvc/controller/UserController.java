@@ -22,6 +22,15 @@ public class UserController {
         User user = userService.getUser(id);
         return ResponseEntity.ok(user);
     }
+    @GetMapping("/users")
+    public List<User> getAllUser(){
+        return userService.findAll();
+
+    }
+    @GetMapping("/users/findUserByName")
+    public ResponseEntity<User> findByNameContains(@RequestParam("name") String name){
+      return new ResponseEntity<>(userService.findByUserName(name), HttpStatus.OK) ;
+    }
 
     @PostMapping("users")
     public User createUser(@RequestBody User user) {

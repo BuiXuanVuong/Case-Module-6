@@ -79,6 +79,7 @@ public class StatusController {
         return statusSevice.findWallStatuses(user_friend.getId());
     }
 
+
     @RequestMapping("status/friend/{userNameLogin}/{userNameFriend}")
     public Status statusFriend(@PathVariable("userNameLogin") String userNameLogin, @PathVariable("userNameFriend") String userNameFriend, @RequestBody Status status) {
         User user_login = userService.findByUserName(userNameLogin);
@@ -90,5 +91,6 @@ public class StatusController {
         statusSevice.saveStatus(status);
         return status;
     }
+
 
 }

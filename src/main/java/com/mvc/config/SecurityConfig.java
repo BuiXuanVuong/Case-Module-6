@@ -1,6 +1,7 @@
 package com.mvc.config;
 
 
+import com.mvc.model.Role;
 import com.mvc.model.User;
 import com.mvc.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Configuration
@@ -38,6 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             User user = new User();
             user.setUserName("admin");
             user.setPassword(passwordEncoder.encode("admin"));
+            Set<Role> roles= new HashSet<>();
+            Role role= new Role();
+            role.setName("ROLE_ADMIN");
+            roles.add(role);
+            user.setRoles(roles);
             userService.save(user);
         }
     }
@@ -78,9 +87,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/**");
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
+
                 .antMatchers("/", "/login", "/users").permitAll()
                 .anyRequest().authenticated()
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+
                 .and().csrf().disable();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());

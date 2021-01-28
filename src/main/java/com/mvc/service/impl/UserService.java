@@ -46,6 +46,13 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
+    
+
+//    @Override
+//    public Optional<User> findOneByStatusId(long id) {
+//        return userRepository.findOneByStatusId(id);
+//    }
+
     @Override
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
@@ -72,7 +79,9 @@ public class UserService implements IUserService {
         return userRepository.findOneByUserName(username);
     }
 
+
     public List<User> searchByName(Optional<String> name) {
         return userRepository.findByUserNameContaining(name);
     }
+
 }

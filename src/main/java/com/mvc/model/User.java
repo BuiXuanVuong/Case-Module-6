@@ -11,7 +11,7 @@ import java.util.Set;
 public class User {
 
     public User () {
-
+        this.isNonBanned= true;
     }
 
     @Id
@@ -35,6 +35,9 @@ public class User {
 
     @Column(name = "image")
     private String image;
+
+    @Column(name = "is_non_banned", columnDefinition="Boolean default 'true'")
+    private boolean isNonBanned;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
@@ -102,6 +105,14 @@ public class User {
 
     public void setStatusLikes(Set<StatusLike> statusLikes) {
         this.statusLikes = statusLikes;
+    }
+
+    public boolean isNonBanned() {
+        return isNonBanned;
+    }
+
+    public void setNonBanned(boolean nonBanned) {
+        this.isNonBanned = nonBanned;
     }
 
     public Long getId() {
